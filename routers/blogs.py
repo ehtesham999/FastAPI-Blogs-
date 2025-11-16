@@ -6,9 +6,11 @@ from schemas import BlogResponse, UserResponse, Blogs, User
 from database import get_db
 from repository import blogs
 from typing import List
+from oauth2 import get_current_user
 router = APIRouter(
     prefix="/blogs",
-    tags=["Blogs"]
+    tags=["Blogs"],
+    dependencies=[Depends(get_current_user)]
 )
 
 @router.post("/", response_model=BlogResponse)
